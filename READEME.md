@@ -1,0 +1,2 @@
+# About
+* This is my attempt to practice working with Open AI’s API while it’s still up. I will practice building basic function chatbot with Python and Flask with context window, then will configure a SQL database version of the app to store chat histories and develop a more reliable way to retain context history. This will give me ground work for the AI integration for Researcher Village+
