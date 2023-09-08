@@ -4,7 +4,10 @@ const chatResponse = e =>{
     let newPrompt = new FormData(chatBoxInput);
     // let chatCorrespondences = document.getElementById('completions')
     fetch("http://127.0.0.1:5000/get/completion", {method: 'post', body: newPrompt })
-    .then(res => res.json())
+    .then(res => {
+        if(!res.ok){throw new Error('Network response was not ok!')} 
+        return res.json()
+    })
     .then(data =>{
         console.log(data)
     })
