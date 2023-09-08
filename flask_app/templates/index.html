@@ -11,17 +11,17 @@
 <body class="bg-dark">
     <div class="mx-auto my-4 col-10">
         <div class="text-white" id="completions">
-            
+
         </div>
         <div class="bg-white col-5 mx-auto">
             <p>Chat Convo</p>
         </div>
-        <form  class="d-flex col-5 mx-auto" onsubmit="chatResponse()" method="post" id="chatbot">
+        <form  class="d-flex col-5 mx-auto" onsubmit="chatResponse(event)" method="post" id="chatbot">
             <!-- <label class="form-label" for="chat-input"></label> -->
-            <input id="chat-input" name="user-input" type="text" class="form-control me-3">
+            <input id="chat-input" name="user-prompt" type="text" class="form-control me-3">
             <input class=" btn btn-primary" type="submit" value="Chat">
         </form>
     </div>
-<script type="text/javascript" src="../static/chatBotServe.js"></script>
+<script type="text/javascript" src="{{url_for('static', filename='chatBotServe.js')}}"></script>
 </body>
 </html>
