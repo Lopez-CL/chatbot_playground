@@ -23,9 +23,10 @@ def get_completion(context, model='gpt-3.5-turbo', temperature=0):
 def join_completion_with_messages():
     user_message = request.form['user-prompt']
     if 'messages' in session:
-        session['messages'].append({'role': 'user','content':user_message})
-        print(session['messages'])
+        session['messages'].append({'role': 'user','content': user_message})
         response = get_completion(session['messages'])
         session['messages'].append({'role': 'assistant', 'content': response})
-        result = session['messages']
+        print(session['messages'])
+        result = session['messages'][-2:]
+        print(result)
         return jsonify(result)
