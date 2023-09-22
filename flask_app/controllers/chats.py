@@ -16,7 +16,6 @@ def render_chatbot():
 openai.api_key = os.getenv('OPENAI_API_KEY')
 def get_completion(context, model='gpt-3.5-turbo', temperature=0):
     response = openai.ChatCompletion.create(model=model, messages=context,temperature=temperature)
-    print(str(response.choices[0].message))
     return response.choices[0].message['content']
 
 @app.route('/get/completion', methods = ['post'])
@@ -27,6 +26,6 @@ def join_completion_with_messages():
         response = get_completion(session['messages'])
         session['messages'].append({'role': 'assistant', 'content': response})
         print(session['messages'])
-        result = session['messages'][-2:]
+        result = session['messages'][-1:]
         print(result)
         return jsonify(result)
