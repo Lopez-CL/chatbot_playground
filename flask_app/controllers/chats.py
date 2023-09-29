@@ -1,5 +1,5 @@
 from flask_app import app
-from flask import request, render_template, redirect, session, flash, jsonify
+from flask import request, render_template, redirect, session, flash, jsonify, Response
 from flask_session import Session 
 import os, requests
 from dotenv import load_dotenv, find_dotenv
@@ -29,3 +29,12 @@ def join_completion_with_messages():
         result = session['messages'][-1:]
         print(result)
         return jsonify(result)
+
+@app.route('/clear/session', methods=['Get'])
+def clear_chat_session():
+    session.clear()
+    session['messages'] = [
+    {"role": "system", "content": "You are a helpful assistant."},
+    ]
+    print(session['messages'])
+    return Response(status = 204)
