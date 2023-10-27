@@ -16,7 +16,8 @@ const chatResponse = e =>{
         return null
     }
     let userMessage = document.createElement('p')
-    userMessage.innerText = `${currentUserPrompt}`
+    userMessage.innerHTML = `<strong>User: </strong> ${currentUserPrompt}`
+    completionsContainer.classList.add('p-1')
     completionsContainer.appendChild(userMessage)
     let newPrompt = new FormData(chatForm);
     fetch("http://127.0.0.1:5000/get/completion", {method: 'post', body: newPrompt })
@@ -24,16 +25,15 @@ const chatResponse = e =>{
         if(!res.ok){throw new Error('Network response was not ok!')} 
         chatInput.value=""
         currentUserPrompt = ""
+        chatInput.placeholder = "Continue the discussion"
         return res.json()
     })
     .then(data =>{
         console.log(data)
         let botMessage = document.createElement('p')
-        botMessage.innerText =  `${data[0].content}`
-        botMessage.classList.add('text-black')
+        botMessage.innerHTML =  `<strong>Bot: </strong>${data[0].content}`
         console.log(data[0].content)
         console.log(botMessage)
-        console.log(`${data[0].content}`)
         completionsContainer.appendChild(botMessage)
     })
     .catch(err => console.log(err))

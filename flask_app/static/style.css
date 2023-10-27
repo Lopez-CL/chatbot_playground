@@ -1,12 +1,10 @@
 
-/* form{
-    width: 90%;
-} */
 
-/* buttons */
-/* .btn{
-    height: fit-content;
-} */
+/* Components and Elements */
 .btn-danger{
     width: 275px;
+}
+
+#completions p{
+    color: white;
 }
