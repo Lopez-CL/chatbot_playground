@@ -1,6 +1,21 @@
 
-
+/* Global */
+body{
+    overflow: scroll;
+}
 /* Components and Elements */
+/* #completions{
+    max-height: 200px;
+    overflow-y: scroll;
+} */
+
+form{
+    z-index: 1;
+    position: sticky;
+    bottom: 10px;
+    height: 50px;
+}
+
 .btn-danger{
     width: 275px;
 }
