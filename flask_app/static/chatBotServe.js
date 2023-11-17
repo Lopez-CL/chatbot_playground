@@ -1,13 +1,15 @@
-// For chat start and serving responses
+// Variable set up
 const chatInput = document.getElementById('chat-input')
 const chatForm = document.getElementById('chatbot')
 const completionsContainer = document.getElementById('completions')
+// Function to grab the prompt a user wants to send
 let currentUserPrompt = ""
 const promptInput = e =>{
     currentUserPrompt = e.currentTarget.value
     console.log(currentUserPrompt)
     }
 chatInput.addEventListener('input', promptInput)
+// Function to handle chat submission
 const chatResponse = e =>{
     e.preventDefault();
     console.log(currentUserPrompt)
@@ -15,6 +17,7 @@ const chatResponse = e =>{
         console.log("I'm more helpful when you start the conversation.");
         return null
     }
+    // making space for ensuing conversation
     let userMessage = document.createElement('p')
     userMessage.innerHTML = `<strong>User: </strong> ${currentUserPrompt}`
     completionsContainer.classList.add('p-1')
@@ -28,6 +31,7 @@ const chatResponse = e =>{
         chatInput.placeholder = "Continue the discussion"
         return res.json()
     })
+    // Handling returned data
     .then(data =>{
         console.log(data)
         let botMessage = document.createElement('p')
@@ -51,3 +55,14 @@ const clearSession = e =>{
     })
 }
 clearChatBtn.addEventListener('click', clearSession)
+// other features
+const scrollTop = document.getElementById('scrollUp')
+scrollTop.addEventListener('click', ( ) => {
+    console.log('scrolling up')
+    window.scrollTo({top:0, behavior: 'smooth'})
+})
+const scrollDown = document.getElementById('scrollDown')
+scrollDown.addEventListener('click', ( ) => {
+    console.log('scrolling down')
+    window.scrollTo({top:document.body.scrollHeight, behavior: 'smooth'})
+})

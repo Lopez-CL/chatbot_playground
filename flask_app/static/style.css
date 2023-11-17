@@ -9,12 +9,7 @@ body{
     overflow-y: scroll;
 } */
 
-form{
-    z-index: 1;
-    position: sticky;
-    bottom: 10px;
-    height: 50px;
-}
+
 
 .btn-danger{
     width: 275px;
@@ -22,4 +17,23 @@ form{
 
 #completions p{
     color: white;
+}
+.scroll-button-wrapper{
+    z-index: 1;
+    width: 10%;
+    position: sticky;
+    bottom: 100px;
+    opacity: 1;
+    transition: opacity 1s ease-in-out
+}
+
+.scroll-button{
+    border-radius: 25px;
+
+}
+form{
+    z-index: 1;
+    position: sticky;
+    bottom: 10px;
+    height: 50px;
 }
