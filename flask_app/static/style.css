@@ -20,7 +20,7 @@ body{
 }
 .scroll-button-wrapper{
     z-index: 1;
-    width: 10%;
+    width: 40%;
     position: sticky;
     bottom: 100px;
     opacity: 1;
@@ -29,6 +29,7 @@ body{
 
 .scroll-button{
     border-radius: 25px;
+    display: none;
 
 }
 form{

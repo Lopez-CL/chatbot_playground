@@ -1,4 +1,5 @@
 // Variable set up
+const originalWindowHeight = window.innerHeight;
 const chatInput = document.getElementById('chat-input')
 const chatForm = document.getElementById('chatbot')
 const completionsContainer = document.getElementById('completions')
@@ -23,6 +24,13 @@ const chatResponse = e =>{
     completionsContainer.classList.add('p-1')
     completionsContainer.appendChild(userMessage)
     let newPrompt = new FormData(chatForm);
+    if(completionsContainer.clientHeight > originalWindowHeight){
+        scrollTopButton.style.display = "inline-flex"
+        scrollDownButton.style.display = "inline-flex"
+    }else{
+        scrollTopButton.style.display = "none"
+        scrollDownButton.style.display = "none"
+    }
     fetch("http://127.0.0.1:5000/get/completion", {method: 'post', body: newPrompt })
     .then(res => {
         if(!res.ok){throw new Error('Network response was not ok!')} 
@@ -52,17 +60,28 @@ const clearSession = e =>{
         completionsContainer.innerHTML= "";
         chatInput.value=""
         currentUserPrompt = ""
+        scrollTopButton.style.display = "none"
+        scrollDownButton.style.display = "none"
     })
 }
 clearChatBtn.addEventListener('click', clearSession)
-// other features
-const scrollTop = document.getElementById('scrollUp')
-scrollTop.addEventListener('click', ( ) => {
+// autoscroll features
+const scrollTopButton = document.getElementById('scrollUp')
+scrollTopButton.addEventListener('click', ( ) => {
     console.log('scrolling up')
     window.scrollTo({top:0, behavior: 'smooth'})
 })
-const scrollDown = document.getElementById('scrollDown')
-scrollDown.addEventListener('click', ( ) => {
+const scrollDownButton = document.getElementById('scrollDown')
+scrollDownButton.addEventListener('click', ( ) => {
     console.log('scrolling down')
     window.scrollTo({top:document.body.scrollHeight, behavior: 'smooth'})
 })
+if(completionsContainer.clientHeight > originalWindowHeight){
+    scrollTopButton.style.display = "inline-flex"
+    scrollDownButton.style.display = "inline-flex"
+}else{
+    scrollTopButton.style.display = "none"
+    scrollDownButton.style.display = "none"
+}
+console.log(`${originalWindowHeight} is the number of the original height!`)
+console.log(`${completionsContainer.clientHeight} is the number of the original height!`)
