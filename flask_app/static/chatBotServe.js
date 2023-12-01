@@ -7,7 +7,6 @@ const completionsContainer = document.getElementById('completions')
 let currentUserPrompt = ""
 const promptInput = e =>{
     currentUserPrompt = e.currentTarget.value
-    console.log(currentUserPrompt)
     }
 chatInput.addEventListener('input', promptInput)
 // Function to handle chat submission
@@ -15,6 +14,7 @@ const chatResponse = e =>{
     e.preventDefault();
     console.log(currentUserPrompt)
     if(!currentUserPrompt){
+        // I may want to change this eventually
         console.log("I'm more helpful when you start the conversation.");
         return null
     }
@@ -42,11 +42,18 @@ const chatResponse = e =>{
     // Handling returned data
     .then(data =>{
         console.log(data)
+        // consider how you may want to handle the case of an empty array.
         let botMessage = document.createElement('p')
-        botMessage.innerHTML =  `<strong>Bot: </strong>${data[0].content}`
-        console.log(data[0].content)
-        console.log(botMessage)
         completionsContainer.appendChild(botMessage)
+        botMessage.innerHTML = "Bot: "
+        let idx = 0
+        const writeBotResponse = setInterval(()=>{
+            botMessage.innerHTML += `${data[idx]} `
+            idx++
+            if(idx === data.length){
+                clearInterval(writeBotResponse)
+            }
+        }, 350)
     })
     .catch(err => console.log(err))
 }
@@ -83,5 +90,3 @@ if(completionsContainer.clientHeight > originalWindowHeight){
     scrollTopButton.style.display = "none"
     scrollDownButton.style.display = "none"
 }
-console.log(`${originalWindowHeight} is the number of the original height!`)
-console.log(`${completionsContainer.clientHeight} is the number of the original height!`)

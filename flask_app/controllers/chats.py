@@ -27,8 +27,8 @@ def join_completion_with_messages():
         session['messages'].append({'role': 'assistant', 'content': response})
         print(session['messages'])
         result = session['messages'][-1:]
-        print(result)
-        return jsonify(result)
+        print(result[0]['content'].split())
+        return jsonify(result[0]['content'].split())
 
 @app.route('/clear/session', methods=['Get'])
 def clear_chat_session():
